@@ -21,7 +21,8 @@ Vagrant.configure("2") do |config|
     # Installs Foreman and Katello via Forklift
     foreman.vm.provision "shell", inline: "git clone https://github.com/theforeman/forklift.git"
     foreman.vm.provision "shell", inline: "yum install -y ansible"
-    foreman.vm.provision "shell", inline: "cd forklift; ansible-playbook -l localhost playbooks/katello.yml -e foreman_repositories_version=1.20 -e katello_repositories_version=3.10"
+    foreman.vm.provision "shell", inline: "cd forklift; ansible-playbook -l localhost playbooks/katello.yml -e foreman_repositories_version=1.20 -e katello_repositories_version=3.10 -e  puppet_repositories_version=5 | exit 0"
+    foreman.vm.provision "shell", inline: "foreman-maintain service restart"
 
     # Sets up a small demo set of lifecycle environments, repositories, products, content views, and activation keys    
     foreman.vm.provision "shell", inline: <<-EOF

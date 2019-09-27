@@ -1,0 +1,7 @@
+---
+sudo::configs:
+'foreman-service':
+    'content' : |
+                  foreman-service ALL = (root) NOPASSWD : /sbin/shutdown, /usr/sbin/subscription-manager, /usr/bin/yum, /etc/cron.d/0yum.cron, /sbin/yum-cron
+                  Defaults:foreman-service !requiretty
+    'priority': 10
